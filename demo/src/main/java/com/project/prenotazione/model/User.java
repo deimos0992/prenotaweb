@@ -13,9 +13,12 @@ public class User {
     @NotBlank(message = "user is required")
     private String user;
 
+    @NotBlank(message = "password is required")
     private String password;
 
-    public User(Long id, @NotBlank(message = "user is required") String user, String password) {
+    public User() {}
+
+    public User(Long id, String user, String password) {
         this.id = id;
         this.user = user;
         this.password = password;
