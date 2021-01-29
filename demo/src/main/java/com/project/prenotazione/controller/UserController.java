@@ -27,4 +27,10 @@ public class UserController {
         User user = service.saveUser(userDto);
         return ResponseEntity.ok(user);
     }
+
+    @GetMapping("/user/{id}")
+    public ResponseEntity<User> getSingleUsers(@RequestParam Long id){
+        User user = service.getSingleUser(id);
+        return ResponseEntity.ok(user);
+    }
 }
