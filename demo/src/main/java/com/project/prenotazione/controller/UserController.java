@@ -3,7 +3,7 @@ package com.project.prenotazione.controller;
 import com.project.prenotazione.dto.UtenteDto;
 import com.project.prenotazione.model.Utente;
 import com.project.prenotazione.service.UtenteService;
-
+import org.springframework.validation.annotation.Validated;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -26,7 +26,7 @@ public class UserController {
     }
 
     @PostMapping("/utente")
-    public ResponseEntity<Utente> saveSingleUtente(@Valid @RequestBody UtenteDto utenteDto){
+    public ResponseEntity<Utente> saveSingleUtente(@Validated @RequestBody UtenteDto utenteDto){
     	Utente utente = service.saveUser(utenteDto);
         return ResponseEntity.ok(utente);
     }

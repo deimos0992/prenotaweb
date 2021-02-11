@@ -21,7 +21,6 @@ public class Utente {
     @NotBlank(message = "codiceFiscale is required")
     private String codiceFiscale;
     
-    @NotBlank(message = "dataDiNascita is required")
     private LocalDate dataDiNascita;
 
     
