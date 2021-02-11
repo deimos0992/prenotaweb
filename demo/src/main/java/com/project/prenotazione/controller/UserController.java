@@ -33,4 +33,12 @@ public class UserController {
         User user = service.getSingleUser(id);
         return ResponseEntity.ok(user);
     }
+
+    @PutMapping("/user/{id}")
+    public ResponseEntity<User> putSingleUser(@RequestParam Long id, @RequestBody UserDto userDto){
+        User user = service.modifySingleUser(id, userDto);
+        return ResponseEntity.ok(user);
+    }
+
+
 }

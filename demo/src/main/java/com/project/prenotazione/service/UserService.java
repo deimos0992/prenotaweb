@@ -5,7 +5,6 @@ import com.project.prenotazione.exception.UserException;
 import com.project.prenotazione.model.User;
 import com.project.prenotazione.repository.UserRepository;
 import lombok.AllArgsConstructor;
-import lombok.extern.java.Log;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -28,6 +27,16 @@ public class UserService {
 
     public User saveUser(UserDto userDto){
         User user = new User();
+        user.setUser(userDto.getUsername());
+        user.setPassword(userDto.getPassword());
+        userRepository.save(user);
+        return user;
+    }
+
+    public User modifySingleUser(Long id, UserDto userDto ){
+
+        User user = getSingleUser(id);
+
         user.setUser(userDto.getUsername());
         user.setPassword(userDto.getPassword());
         userRepository.save(user);
