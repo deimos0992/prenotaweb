@@ -4,8 +4,8 @@ spring:
     driver-class-name: "com.mysql.cj.jdbc.Driver"
     url: "jdbc:mysql://localhost:3306/prenotaweb?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC"
     username: "root"
-    password: "root"
-    #password: "manager"
+    ## Commenta se devi collegarti con Xxamp
+    #password: "root"
   jpa:
     properties:
       hibernate:

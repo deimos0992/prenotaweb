@@ -17,8 +17,8 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
     private String INCORRECT_REQUEST = "INCORRECT_REQUEST";
     private String BAD_REQUEST = "BAD_REQUEST";
 
-    @ExceptionHandler(UserException.class)
-    public final ResponseEntity<ErrorResponse> handleUserNotFoundException(UserException ex, WebRequest request){
+    @ExceptionHandler(UtenteException.class)
+    public final ResponseEntity<ErrorResponse> handleUserNotFoundException(UtenteException ex, WebRequest request){
 
         List<String> details = new ArrayList<>();
         details.add(ex.getLocalizedMessage());

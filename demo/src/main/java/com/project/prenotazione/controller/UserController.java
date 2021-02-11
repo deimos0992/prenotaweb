@@ -1,44 +1,47 @@
 package com.project.prenotazione.controller;
 
-import com.project.prenotazione.dto.UserDto;
-import com.project.prenotazione.model.User;
-import com.project.prenotazione.service.UserService;
+import com.project.prenotazione.dto.UtenteDto;
+import com.project.prenotazione.model.Utente;
+import com.project.prenotazione.service.UtenteService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/utente")
 public class UserController {
 
     @Autowired
-    private UserService service;
+    private UtenteService service;
 
-    @GetMapping("/users")
-    public ResponseEntity<List<User>> getAllUsers(){
-        List<User> userslist = service.getAllUser();
-        return ResponseEntity.ok(userslist);
+    @GetMapping("/utente")
+    public ResponseEntity<List<Utente>> getAllUtenti(){
+        List<Utente> utentiList = service.getAllUser();
+        return ResponseEntity.ok(utentiList);
     }
 
-    @PostMapping("/user")
-    public ResponseEntity<User> postUser(@RequestBody UserDto userDto){
-        User user = service.saveUser(userDto);
-        return ResponseEntity.ok(user);
+    @PostMapping("/utente")
+    public ResponseEntity<Utente> saveSingleUtente(@Valid @RequestBody UtenteDto utenteDto){
+    	Utente utente = service.saveUser(utenteDto);
+        return ResponseEntity.ok(utente);
     }
-
-    @GetMapping("/user/{id}")
-    public ResponseEntity<User> getSingleUsers(@RequestParam Long id){
-        User user = service.getSingleUser(id);
-        return ResponseEntity.ok(user);
-    }
-
-    @PutMapping("/user/{id}")
-    public ResponseEntity<User> putSingleUser(@RequestParam Long id, @RequestBody UserDto userDto){
-        User user = service.modifySingleUser(id, userDto);
-        return ResponseEntity.ok(user);
-    }
+//
+//    @GetMapping("/user/{id}")
+//    public ResponseEntity<User> getSingleUsers(@RequestParam Long id){
+//        User user = service.getSingleUser(id);
+//        return ResponseEntity.ok(user);
+//    }
+//
+//    @PutMapping("/user/{id}")
+//    public ResponseEntity<User> putSingleUser(@RequestParam Long id, @RequestBody UserDto userDto){
+//        User user = service.modifySingleUser(id, userDto);
+//        return ResponseEntity.ok(user);
+//    }
 
 
 }
