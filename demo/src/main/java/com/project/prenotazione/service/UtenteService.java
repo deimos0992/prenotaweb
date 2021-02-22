@@ -17,34 +17,48 @@ import java.util.Optional;
 public class UtenteService {
 
 	@Autowired
-    private UtenteRepository utenteRepository;
+	private UtenteRepository utenteRepository;
+/**
+ * <h1> Nuova </h1>*/
+	
+	public List<Utente> getAllUser() {
+		return utenteRepository.findAll();
+	}
 
-    public List<Utente> getAllUser(){
-         return utenteRepository.findAll();
-    }
+	public Utente getSingleUser(Long id) {
+		Optional<Utente> user = utenteRepository.findById(id);
+		return user.orElseThrow(() -> new UtenteException("utente con id: " + id + " non trovato"));
+	}
 
-    public Utente getSingleUser(Long id){
-        Optional<Utente> user = utenteRepository.findById(id);
-        return user.orElseThrow(() ->  new UtenteException("utente con id: "+ id + " non trovato"));
-    }
+	public Utente saveUser(UtenteDto utenteDto) {
 
-    public Utente saveUser(UtenteDto utenteDto){
-    	
-    	Utente utente = new Utente();
-    	
-    	utente.setNome(utenteDto.getNome());
-    	utente.setCognome(utenteDto.getCognome());
-    	utente.setCodiceFiscale(utenteDto.getCodiceFiscale());
-    	utente.setDataDiNascita(LocalDate.parse(utenteDto.getDataDiNascita()));
-        utenteRepository.save(utente);
-        return utente;
-    }
+		Utente utente = new Utente();
+		
+		utente.setNome(utenteDto.getNome());
+		utente.setCognome(utenteDto.getCognome());
+		utente.setCodiceFiscale(utenteDto.getCodiceFiscale());
+		utente.setDataDiNascita(LocalDate.parse(utenteDto.getDataDiNascita()));
+		utenteRepository.save(utente);
+		
+		return utente;
+	}
 
-//    public Utente modifySingleUser(Long id, UserDto userDto){
-//        User user = getSingleUser(id);
-//        user.setUser(userDto.getUsername());
-//        user.setPassword(userDto.getPassword());
-//        userRepository.save(user);
-//        return user;
-//    }
+	public Utente modifySingleUser(Long id, UtenteDto utenteDto) {
+		
+		Utente utente = getSingleUser(id);
+		utente.setNome(utenteDto.getNome());
+		utente.setCognome(utenteDto.getCognome());
+		utente.setCodiceFiscale(utenteDto.getCodiceFiscale());
+		utente.setDataDiNascita(LocalDate.parse(utenteDto.getDataDiNascita()));
+		
+		utenteRepository.save(utente);
+		
+		return utente;
+	}
+
+	public void deleteUtente(Long id) {
+		
+		utenteRepository.deleteById(id);
+		
+	}
 }

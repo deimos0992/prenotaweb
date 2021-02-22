@@ -16,32 +16,33 @@ import javax.validation.Valid;
 @RequestMapping("/utente")
 public class UserController {
 
-    @Autowired
-    private UtenteService service;
+	@Autowired
+	private UtenteService service;
 
-    @GetMapping("/utente")
-    public ResponseEntity<List<Utente>> getAllUtenti(){
-        List<Utente> utentiList = service.getAllUser();
-        return ResponseEntity.ok(utentiList);
-    }
+	@GetMapping("/utente")
+	public ResponseEntity<List<Utente>> getAllUtenti() {
+		List<Utente> utentiList = service.getAllUser();
+		return ResponseEntity.ok(utentiList);
+	}
 
-    @PostMapping("/utente")
-    public ResponseEntity<Utente> saveSingleUtente(@Validated @RequestBody UtenteDto utenteDto){
-    	Utente utente = service.saveUser(utenteDto);
-        return ResponseEntity.ok(utente);
-    }
-//
-//    @GetMapping("/user/{id}")
-//    public ResponseEntity<User> getSingleUsers(@RequestParam Long id){
-//        User user = service.getSingleUser(id);
-//        return ResponseEntity.ok(user);
-//    }
-//
-//    @PutMapping("/user/{id}")
-//    public ResponseEntity<User> putSingleUser(@RequestParam Long id, @RequestBody UserDto userDto){
-//        User user = service.modifySingleUser(id, userDto);
-//        return ResponseEntity.ok(user);
-//    }
+	@PostMapping("/utente")
+	public ResponseEntity<Utente> saveSingleUtente(@Validated @RequestBody UtenteDto utenteDto) {
+		Utente utente = service.saveUser(utenteDto);
+		return ResponseEntity.ok(utente);
+	}
 
+	@PutMapping("/user/{id}")
+	public ResponseEntity<Utente> putSingleUser(@RequestParam Long id, @RequestBody UtenteDto utenteDto) {
+		Utente utente = service.modifySingleUser(id, utenteDto);
+		return ResponseEntity.ok(utente);
+	}
+	
+	@DeleteMapping("/user/{id}")
+	public ResponseEntity<String> deleteSingleUtente(@RequestParam Long id){
+		
+		service.deleteUtente(id);
+		return ResponseEntity.ok("ok");
+		
+	}
 
 }
